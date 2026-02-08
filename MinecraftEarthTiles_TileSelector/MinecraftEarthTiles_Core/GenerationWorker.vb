@@ -3544,6 +3544,9 @@ Public Class GenerationWorker
             WriteTilesVariablesToBatch(ScriptBatchFile, Tile)
             WriteCustomTextToBatch(ScriptBatchFile, BatchFileName.ImageMagickGeneration, "Before")
 
+            ScriptBatchFile.WriteLine($"if not exist ""%PathToScriptsFolder%\image_exports"" mkdir ""%PathToScriptsFolder%\image_exports""")
+            ScriptBatchFile.WriteLine($"if not exist ""%PathToScriptsFolder%\image_exports\%Tile%"" mkdir ""%PathToScriptsFolder%\image_exports\%Tile%""")
+
             Dim NumberOfResize = "( +clone -resize 50%% )"
             Dim NumberOfResizeWater = "( +clone -filter Gaussian -resize 50%% -morphology Dilate Gaussian )"
             Dim TilesSize As Double = CType(ClassWorker.MyWorldSettings.BlocksPerTile, Double)
